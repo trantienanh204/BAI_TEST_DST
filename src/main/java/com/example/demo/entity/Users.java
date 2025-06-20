@@ -22,9 +22,9 @@ public class Users {
     private String username;
     private String password;
     private String email;
-    private Integer phone;
+    private String phone;
     private String avatar;
-    private String roles;
+    private List<String> roles;
     private Boolean status;
     private Boolean delete;
     private LocalDate ngayTao;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -19,9 +20,9 @@ public class JwtUtil {
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final long expiration = 86400000; // 1 ngày
 
-    public String generateToken(String username, String role) {
+    public String generateToken(String username, List<String> roles) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role);
+        claims.put("roles", roles); // Lưu danh sách vai trò
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
@@ -40,13 +41,13 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public String getRoleFromToken(String token) {
+    public List<String> getRolesFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
-                .get("role", String.class);
+                .get("roles", List.class);
     }
 
     public boolean validateToken(String token) {
