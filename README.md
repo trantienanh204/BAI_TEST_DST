@@ -23,7 +23,7 @@ cung cấp sẵn :
 
 ##       spring.data.mongodb.uri=mongodb+srv://trantienanht00:090909999@tanh.xghyg.mongodb.net/DTS_USERS?retryWrites=true&w=majority
 
-## có thể thay đế theo ý thích nếu muốn 
+> **LƯU Ý:**       có thể thay đế theo ý thích nếu muốn 
 
 4. Cài Đặt Phụ Thuộc
 
