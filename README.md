@@ -14,12 +14,14 @@ Các Bước Cài Đặt
 1. Clone Repository
 Clone dự án từ repository Git về máy local của bạn:
 
-##   [git clone https://github.com/your-username/your-repo.git](https://github.com/trantienanh204/BAI_TEST_DST.git)
+##      https://github.com/trantienanh204/BAI_TEST_DST.git
 
 3. Cấu Hình application.properties
 Chỉnh sửa file src/main/resources/application.properties với thông tin kết nối MongoDB:
 
-cung cấp sẵn :spring.data.mongodb.uri=mongodb+srv://trantienanht00:090909999@tanh.xghyg.mongodb.net/DTS_USERS?retryWrites=true&w=majority
+cung cấp sẵn :  
+
+spring.data.mongodb.uri=mongodb+srv://trantienanht00:090909999@tanh.xghyg.mongodb.net/DTS_USERS?retryWrites=true&w=majority
 
 ## có thể thay đế theo ý thích nếu muốn 
 
