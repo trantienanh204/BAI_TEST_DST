@@ -142,6 +142,21 @@ Phản hồi mong đợi (200 ok):
     }
 }
 ```
+7. Docker
+   
+# User API - Docker Image
+
+## Link Docker Hub
+https://hub.docker.com/r/tanh0206/user-api
+
+## Hướng dẫn chạy app
+
+```bash
+docker pull tanh0206/user-api
+docker run -p 8080:8080 tanh0206/user-api
+```
+
+
 ## Xử Lý Sự Cố
 
 Lỗi Kết Nối MongoDB: Đảm bảo MongoDB đang chạy và chuỗi kết nối trong application.properties đúng.
