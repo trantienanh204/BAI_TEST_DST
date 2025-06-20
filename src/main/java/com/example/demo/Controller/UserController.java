@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -37,8 +38,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
-
-    @PostMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/admin/users")
     public ResponseEntity<String> addUser(@Valid @RequestBody RegisterRequestDTO registerRequestDTO) {
         log.info("Yêu cầu thêm người dùng mới: {}", registerRequestDTO.getUsername());
         try {
@@ -49,8 +50,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
-    @PutMapping("/users/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/admin/users/{id}")
     public ResponseEntity<String> updateUser(@PathVariable String id, @Valid @RequestBody UserDTO userDTO) {
         log.info("Yêu cầu cập nhật người dùng với id: {}", id);
         try {
@@ -61,8 +62,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
-    @DeleteMapping("/users/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/admin/users/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable String id) {
         log.info("Yêu cầu xóa người dùng với id: {}", id);
         try {
@@ -75,8 +76,13 @@ public class UserController {
     }
 
     @GetMapping("/users/admin/test")
-    // @PreAuthorize("hasRole('ADMIN')") // Bật nếu cần kiểm soát quyền
+     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> adminTest() {
+        return ResponseEntity.ok("Chỉ admin mới thấy được!");
+    }
+    @GetMapping("/users/test")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<String> UserTest() {
         return ResponseEntity.ok("Chỉ admin mới thấy được!");
     }
 }
