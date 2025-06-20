@@ -17,14 +17,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Users {
     @Id
-    private String  id;
+    private String id;
+    private String name;
     private String username;
     private String password;
     private String email;
     private Integer phone;
     private String avatar;
-    private List<String> roles;
-    private String status;
+    private String roles;
+    private Boolean status;
+    private Boolean delete;
     private LocalDate ngayTao;
     private LocalDate ngaySua;
 }
