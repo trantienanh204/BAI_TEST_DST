@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.*;
 import com.example.demo.entity.Users;
 import com.example.demo.Repository.UserRepository;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.security.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -91,42 +95,16 @@ public class UserService {
             throw new IllegalArgumentException("ID đã được sử dụng: " + registerRequestDTO.getId());
         }
 
-        Users users = new Users();
-        if (registerRequestDTO.getId() != null && !registerRequestDTO.getId().isEmpty()) {
-            users.setId(registerRequestDTO.getId());
-        }
-        users.setName(registerRequestDTO.getName());
-        users.setDelete(false);
-        users.setUsername(registerRequestDTO.getUsername());
-        users.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
-        users.setEmail(registerRequestDTO.getEmail());
-        users.setPhone(registerRequestDTO.getPhone());
-        users.setAvatar(registerRequestDTO.getAvatar());
-        users.setRoles(registerRequestDTO.getRoles() != null ? registerRequestDTO.getRoles() : Collections.singletonList("USER"));
-        users.setStatus(true);
-        users.setNgayTao(LocalDate.now());
-        userRepository.save(users);
+        Users users = userMapper.userRegister(registerRequestDTO);
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
+        userRepository.save(users );
     }
 
     public List<UserDTO> getAllUsers() {
         log.info("Lấy danh sách tất cả người dùng");
         return userRepository.findAll().stream()
                 .filter(user -> !user.getDelete())
-                .map(users -> {
-                    UserDTO userDTO = new UserDTO();
-                    userDTO.setId(users.getId());
-                    userDTO.setName(users.getName());
-                    userDTO.setAvatar(users.getAvatar());
-                    userDTO.setDelete(users.getDelete());
-                    userDTO.setEmail(users.getEmail());
-                    userDTO.setNgayTao(users.getNgayTao());
-                    userDTO.setPhone(users.getPhone());
-                    userDTO.setRoles(users.getRoles() != null ? users.getRoles() : Collections.emptyList());
-                    userDTO.setStatus(users.getStatus());
-                    userDTO.setUsername(users.getUsername());
-                    userDTO.setNgaySua(users.getNgaySua());
-                    return userDTO;
-                })
+                .map(userMapper :: toDto)
                 .collect(Collectors.toList());
     }
 

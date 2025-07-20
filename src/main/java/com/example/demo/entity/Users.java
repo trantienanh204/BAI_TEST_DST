@@ -47,13 +47,13 @@ public class Users {
     private String avatar;
 
     @NotEmpty(message = "Vai trò không được để trống")
-    private List<String> roles;
+    private List<String> roles = List.of("USER");
 
     private Boolean status = true;
     private Boolean delete = false;
 
     @CreatedDate
-    private LocalDate ngayTao;
+    private LocalDate ngayTao = LocalDate.now();
     @LastModifiedDate
     private LocalDate ngaySua;
 }

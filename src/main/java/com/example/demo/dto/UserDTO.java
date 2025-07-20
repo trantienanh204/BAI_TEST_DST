@@ -18,6 +18,7 @@ public class UserDTO {
     private String id;
     @NotBlank(message = "Tên không được để trống")
     private String name;
+    @NotBlank(message = "Tên không được để trống")
     private String username;
     @Email(message = "Email không hợp lệ")
     @NotBlank(message = "Email không được để trống")

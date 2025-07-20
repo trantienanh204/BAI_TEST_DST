@@ -74,7 +74,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
+//test quyền
     @GetMapping("/users/admin/test")
      @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> adminTest() {
