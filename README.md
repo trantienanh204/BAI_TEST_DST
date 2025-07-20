@@ -10,6 +10,7 @@ Git: Để clone repository
 IDE: Tùy chọn (ví dụ: IntelliJ IDEA, Eclipse) cho phát triển
 Postman : Để kiểm tra API 
 
+
 Các Bước Cài Đặt
 1. Clone Repository
 Clone dự án từ repository Git về máy local của bạn:
@@ -87,7 +88,7 @@ GET /api/users: Lấy danh sách tất cả người dùng (yêu cầu xác th�
 POST /api/users: Thêm người dùng mới. 
 Ví dụ request (sử dụng Postman):
 Phương thức: POST
-URL: http://localhost:8080/api/users
+URL: http://localhost:8080/api/admin/users
 Body:
 ```json
 {
@@ -142,6 +143,62 @@ Phản hồi mong đợi (200 ok):
     }
 }
 ```
+## tổng hợp 
+
+## login :
+Phương thức: POST
+URL:/api/login  
+vd:
+```json
+{
+    "username": "abc",
+    "password": "123"
+}
+```
+
+## add :
+Phương thức: POST
+URL:/api/admin/users
+vd:
+Body:
+```json
+{
+    "name": "a thị b",
+    "email": "athib@gmail.com",
+    "phone": "0987654321",
+    "avatar": "",
+    "Password": "000",
+    "roles": ["USER"]
+}
+```
+
+## update :
+Phương thức: PUT
+URL:/api/admin/users/id  
+vd:/api/admin/users/68558c7ca711d716323ffe55
+vd:
+Body:
+```json
+{
+    "name": "a thị b",
+    "email": "athib@gmail.com",
+    "phone": "0987654321",
+    "avatar": "notavata.gpn",
+    "roles": ["USER"]
+}
+```
+
+## AllUsers :
+Phương thức: GET
+URL: /api/users
+
+## Delete :
+Phương thức: DELETE
+URL:/admin/users/{id}
+vd:/api/admin/users/68558c7ca711d716323ffe55
+
+
+
 7. Docker
    
 # User API - Docker Image
